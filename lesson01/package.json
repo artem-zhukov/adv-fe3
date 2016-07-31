@@ -12,6 +12,7 @@
     "clean": "^4.0.2",
     "express": "^4.14.0",
     "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
     "run-sequence": "^1.2.2"
   }
 }
