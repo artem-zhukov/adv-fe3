@@ -19,12 +19,9 @@ $(document).ready(function () {
             var rowClass = '';
             var style = '';
             if (i % 2) {
-                rowClass = 'class = evenRow;';
-                style = 'style = background:white;padding-top:10px;padding-bottom:10px';
-
+                rowClass = 'class = evenRow';
             } else {
                 rowClass = 'class = oddRow';
-                style = 'style = background:grey;padding-top:10px;padding-bottom:10px';
             }
 
             string += '<li  ' + rowClass+ " " + style+ '>' + values.fn(array[i]) + '</li>'; });
