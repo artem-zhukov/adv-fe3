@@ -16,15 +16,12 @@ $(document).ready(function () {
         var string = '<ul>';
 
         array.forEach(function(elem, i) {
-            var rowClass = '';
+            var rowClass = 'evenRow';
             var style = '';
-            if (i % 2) {
-                rowClass = 'class = evenRow';
-            } else {
-                rowClass = 'class = oddRow';
+            if (i % 2 !=0) {
+                rowClass = 'oddRow';
             }
-
-            string += '<li  ' + rowClass+ " " + style+ '>' + values.fn(array[i]) + '</li>'; });
+            string += '<li class="' + rowClass+ '" ' + style+ '>' + values.fn(array[i]) + '</li>'; });
         return string + '</ul>';
     });
 
