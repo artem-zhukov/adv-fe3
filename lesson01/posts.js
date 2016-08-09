@@ -12,15 +12,17 @@ $(document).ready(function () {
     });
 
     Handlebars.registerHelper('table', function (array, values) {
-        var string;
-        for (var i = 0; i < array.length; i++) {
 
-            string = '<li>' + values.fn(array[i]);
+        var string = '<ul>';
 
-            if (values.fn(array[i]).length === 9) continue; //Хотел сделать пропуск пустых строк, но continue не срабатывает
-
-        }
-        return '<ul>' + string + '<li>'  + values.fn(array[i])  + '</li>'+ '</ul>';
+        array.forEach(function(elem, i) {
+            var rowClass = 'evenRow';
+            var style = '';
+            if (i % 2 !=0) {
+                rowClass = 'oddRow';
+            }
+            string += '<li class="' + rowClass+ '" ' + style+ '>' + values.fn(array[i]) + '</li>'; });
+        return string + '</ul>';
     });
 
 
@@ -29,9 +31,6 @@ $(document).ready(function () {
 
     var outHtml = (postsTableTemplate({posts: posts}));
     $('.posts-table').html(outHtml);
-
     $('ul').attr('type','none');
-    $('li:nth-child(odd)').attr('style','background:grey; padding:10px 0 10px 0');
-    $('li:nth-child(even)').attr('style','background:white; padding:10px 0 10px 0');
 
 });
