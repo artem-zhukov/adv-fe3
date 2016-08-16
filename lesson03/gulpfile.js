@@ -2,6 +2,7 @@ var destDir = 'bin';
 var gulp = require('gulp');
 var autoprefixer = require('gulp-autoprefixer');
 var bower = require('gulp-bower');
+var bowerMain = require('bower-main');
 var gulpif = require('gulp-if');
 var concat = require('gulp-concat');
 var connect = require('gulp-connect');
@@ -36,7 +37,7 @@ gulp.task('bower', function () {
 gulp.task('build', ['copy-static', 'css']);
 
 gulp.task('libs',['bower'], function () {
-    return gulp.src('libs/**/*.min.js')
+    return gulp.src( bowerMain( '*.js', '*.min.js' ).minified, { base: destDir })
         .pipe(gulp.dest(destDir+'/libs/'));
 });
 
@@ -52,13 +53,18 @@ gulp.task('html', function () {
 
 gulp.task('css', function () {
     return gulp.src('styles/**/*.less')
+        .pipe(gulpif(!argv.prod, sourcemaps.init()))
         .pipe(concat('styles.css'))
         .pipe(less())
-        .pipe(cssnano())
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
         .pipe(gulpif(argv.prod, minifyCss()))
         .pipe(gulpif(!argv.prod, sourcemaps.write()))
         .pipe(gulp.dest( destDir+'/static/styles.css'));
 });
+
 
 gulp.task('js', function () {
     return gulp.src('js/*.js')
@@ -89,16 +95,6 @@ gulp.task( 'watch', function () {
     gulp.watch('**/*.js', [ 'js' ] );
 } );
 
-gulp.task('autoprefix', function () {
-    return gulp.src(destDir + '/static/styles.css')
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions'],
-            cascade: false
-        }))
-        .pipe(gulp.dest(function (file) {
-            return file.base;
-        }));
-});
 
 //CODESTYLE
 gulp.task('csscomb', function () {
@@ -127,12 +123,7 @@ gulp.task('jshint', function () {
         .pipe(jshint.reporter('JS fatal error'));
 });
 
-gulp.task('style', function () {
-    return bower ('csscomb')
-        .pipe(jscs())
-        .pipe(jshint())
-        .pipe(htmlhint());
-});
+gulp.task('style', ['jscs', 'jshint','htmlhint']);
 
 //CODESTYLE//
 
