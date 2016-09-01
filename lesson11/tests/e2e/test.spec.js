@@ -20,4 +20,19 @@ describe('page ', function () {
         var resAfter = browser.getText('.user-wealth__resources .resource__val')[0];
         expect(resAfter).toBe('19');
     });
+
+    it('bar should inc', function () {
+        var resBefore = browser.getText('.god-hate-indicator__bar').length;
+        var inc = browser.click('.gift-tunner__controls .tune-controls__inc')[0];
+        var bar = browser.getText('.gift-tunner__bar .bar')[0].length;
+
+        expect(resBefore).toBe(50);
+        expect(bar).toBe(1);
+        var resAfter = browser.getText('.god-hate-indicator__bar').length;
+        expect(resAfter).toBe(44);
+    })
+
 });
+
+
+
