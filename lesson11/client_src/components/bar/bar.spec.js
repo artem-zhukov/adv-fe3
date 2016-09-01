@@ -1,12 +1,10 @@
 var Bar  = require('./bar.js');
-var Resource  = require('../../models/resource.js');
 
 describe('bar', function () {
    describe('render method', function () {
        beforeEach(function () {
-            this.resource = new Resource({
-               count: 2
-           });
+
+           this.model = jasmine.createSpyObj('model', ['getCount', 'subscribe']);
 
            this.options={
                model: this.resource
@@ -16,7 +14,19 @@ describe('bar', function () {
 
        it('should be render', function () {
            expect(this.bar.render).toBeDefined;
-       })
+       });
+
+       it('getCount should be defined',function () {
+           expect(this.bar.getCount).toBeDefined();
+       });
+
+       it('modelGetCount should be called', function () {
+           expect(this.model.getCount).toHaveBeenCalled();
+       });
+
+       it('modelSubscribe should be called', function () {
+           expect(this.model.subscribe).toHaveBeenCalled();
+       });
    })
 });
 
