@@ -22,21 +22,19 @@ module.exports = function Game() {
         count: 30
     });
 
+    var arr = [userGoldResource,userCopperResource,userSomeResource];
+
     // create GodGiftForm 
     // {resources: resources}
     var godGiftForm = new GodGiftForm({
-        gold: userGoldResource,
-        copper: userCopperResource,
-        some: userSomeResource
+        model:arr
     })
 
     
     // create UserWealth 
     // {resources: resources}
     var userWealth = new UserWealth({
-        gold: userGoldResource,
-        copper: userCopperResource,
-        some: userSomeResource
+        model:arr
     })
 
     function render() {
