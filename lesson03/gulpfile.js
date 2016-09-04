@@ -1,4 +1,5 @@
 var destDir = 'bin';
+var selfDir = '!**/node_modules/**, !**/libs/**, !**/bin/**';
 var gulp = require('gulp');
 var autoprefixer = require('gulp-autoprefixer');
 var bower = require('gulp-bower');
@@ -42,12 +43,12 @@ gulp.task('libs',['bower'], function () {
 });
 
 gulp.task('images', function () {
-    return gulp.src(['**/*.@(png|jpg|svg)', '!**/node_modules/**', '!**/libs/**', '!**/bin/**']) //Если bin не исключить, то начинает копировать сам себя
+    return gulp.src(['**/*.@(png|jpg|svg)', selfDir]) //Если bin не исключить, то начинает копировать сам себя
         .pipe(gulp.dest(destDir));
 });
 
 gulp.task('html', function () {
-    return gulp.src(['**/*.html','!**/node_modules/**', '!**/libs/**', '!**/bin/**'])
+    return gulp.src(['**/*.html',selfDir])
         .pipe(gulp.dest(destDir));
 });
 
