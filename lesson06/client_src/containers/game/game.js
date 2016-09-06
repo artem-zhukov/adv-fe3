@@ -5,42 +5,35 @@ var Resource = require('models/resource.js');
 module.exports = function Game() {
     var elem = $('<div></div>');
 
-    // create resources 
-    // e.g {count: 10, name: gold}
-    var userGoldResource = new Resource({
-        name: "gold",
-        count: 10
+    var goldResourceModel = new Resource({
+        count: 10,
+        name: 'gold'
     });
 
-    var userCopperResource = new Resource({
-        name: "copper",
-        count: 20
+    var copperResourceModel = new Resource({
+        count: 20,
+        name: 'copper'
     });
 
-    var userSomeResource = new Resource({
-        name: "some",
-        count: 30
+    var someResourceModel = new Resource({
+        count: 30,
+        name: 'some'
     });
 
-    var arr = [userGoldResource,userCopperResource,userSomeResource];
+    var resources = [goldResourceModel, copperResourceModel, someResourceModel];
 
-    // create GodGiftForm 
-    // {resources: resources}
-    var godGiftForm = new GodGiftForm({
-        model:arr
-    })
+    var giftForm = new GodGiftForm({
+        resources: resources
+    });
 
-    
-    // create UserWealth 
-    // {resources: resources}
     var userWealth = new UserWealth({
-        model:arr
-    })
+        resources: resources
+    });
 
     function render() {
         elem.html(App.templates['game']({}));
-         elem.find('.game__god-gift-form').html(godGiftForm.render().elem)
-         elem.find('.game__wealth').html(userWealth.render().elem)
+        elem.find('.game__god-gift-form').html(giftForm.render().elem);
+        elem.find('.game__wealth').html(userWealth.render().elem);
         return this;
     }
 
@@ -49,3 +42,4 @@ module.exports = function Game() {
         elem: elem
     }
 };
+

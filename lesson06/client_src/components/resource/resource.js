@@ -2,19 +2,15 @@ module.exports = function Resource(options) {
     var elem = $('<div></div>');
 
     var model = options.model;
-    var value = model.getCount();
-    var name = model.getName();
 
     model.subscribe(function() {
-        value = model.getCount();
         render();
     });
 
     function render() {
-        elem.html(App.templates['resource']({
-            name: name,
-            value: value
-        }));
+        elem.html(App.templates['resource']({}));
+        elem.find('.resource__name').html(model.getName());
+        elem.find('.resource__val').html(model.getCount());
         return this;
     }
 
@@ -23,4 +19,3 @@ module.exports = function Resource(options) {
         elem: elem
     }
 };
-

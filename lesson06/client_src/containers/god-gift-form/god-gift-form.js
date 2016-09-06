@@ -6,34 +6,42 @@ var Hate = require('models/hate.js');
 module.exports = function GodGiftForm(options) {
     var elem = $('<div></div>');
 
-    var BASE_HATE = 50;
-    var goldResource = new Resource();
-    var copperResource = new Resource();
-    var someResource = new Resource();
-    var hate = new Hate(BASE_HATE);
 
-    Model.subscribeAll([goldResource, copperResource, someResource], function() {
-        hate.setCount(
-            BASE_HATE - someResource.getCount() * 1 - copperResource.getCount() * 2 - goldResource.getCount() * 4
-        );
+    var BASE_HATE = 30;
+    var userGoldResource = options.resources[0];
+    var BASE_GOLD = options.resources[0].getCount();
+    var userCopperResource = options.resources[1];
+    var BASE_COPPER = options.resources[1].getCount();
+    var userSomeResource = options.resources[2];
+    var BASE_SOME = options.resources[2].getCount();
+
+    var hate = new Hate(BASE_HATE);
+    var goldGiftResource = new Resource({name: 'Gold'});
+    var cooperGiftResource = new Resource({name: 'Copper'});
+    var someGiftResource = new Resource({name: 'Some'});
+
+    Model.subscribeAll([goldGiftResource, cooperGiftResource, someGiftResource], function() {
+        hate.setCount(BASE_HATE - someGiftResource.getCount() * 1 - cooperGiftResource.getCount() * 2  - goldGiftResource.getCount() * 3);
+        userGoldResource.setCount(BASE_GOLD - goldGiftResource.getCount());
+        userCopperResource.setCount(BASE_COPPER - cooperGiftResource.getCount());
+        userSomeResource.setCount(BASE_SOME - someGiftResource.getCount());
     });
 
     var godHateIndicator = new GodHateIndicator({
         hate: hate
     });
+
     var goldTunner = new GiftTunner({
-        name: 'Gold',
-        resource: goldResource
-    });
-    var copperTunner = new GiftTunner({
-        name: 'Copper',
-        resource: copperResource
-    });
-    var someTunner = new GiftTunner({
-        name: 'Some',
-        resource: someResource
+        resource: goldGiftResource
     });
 
+    var copperTunner = new GiftTunner({
+        resource: cooperGiftResource
+    });
+
+    var someTunner = new GiftTunner({
+        resource: someGiftResource
+    });
 
     function render() {
         elem.html(App.templates['god-gift-form']({}));
@@ -50,7 +58,7 @@ module.exports = function GodGiftForm(options) {
 
     function subscribeHandlers(elem) {
         elem.find('.god-gift-form__send').click(function() {
-            console.log('send gift [gold: ' + goldResource.getCount() + ', copper:' + copperResource.getCount() + ']');
+            console.log('send gift [gold: ' + goldTunner.getCount() + ', copper:' + copperTunner.getCount() + ', some:' + someTunner.getCount() + ']');
         });
     }
 
@@ -59,3 +67,5 @@ module.exports = function GodGiftForm(options) {
         elem: elem
     }
 };
+
+
