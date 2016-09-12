@@ -42,7 +42,7 @@ build/Release
 
 
 ### Bower ###
-bower_components
+**/bower_components/
 .bower-cache
 .bower-registry
 .bower-tmp
