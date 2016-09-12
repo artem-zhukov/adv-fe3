@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="801d563b-747d-4309-9432-8b2e2fb4a363" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/conflict/adv-fe3/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/conflict/adv-fe3/gitconfig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/conflict/adv-fe3/gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/conflict/adv-fe3/lesson01/app.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/conflict/adv-fe3/lesson01/bower.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/conflict/adv-fe3/lesson01/data.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/conflict/adv-fe3/lesson01/gulpfile.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/conflict/adv-fe3/lesson01/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/conflict/adv-fe3/lesson01/posts.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/conflict/adv-fe3/lesson01/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/conflict/adv-fe3/lesson01/test.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gitignore" afterPath="$PROJECT_DIR$/gitignore" />
-    </list>
+    <list default="true" id="801d563b-747d-4309-9432-8b2e2fb4a363" name="Default" comment="" />
     <ignored path="adv-fe3.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -566,12 +552,12 @@
       <workItem from="1473695250342" duration="545000" />
       <workItem from="1473696081836" duration="681000" />
       <workItem from="1473696965902" duration="998000" />
-      <workItem from="1473698076373" duration="16000" />
+      <workItem from="1473698076373" duration="139000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2240000" />
+    <option name="totallyTimeSpent" value="2363000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
