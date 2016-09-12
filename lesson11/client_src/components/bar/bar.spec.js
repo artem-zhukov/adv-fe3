@@ -13,7 +13,7 @@ describe('bar', function () {
        });
 
        it('should be render', function () {
-           expect(this.bar.render).toBeDefined;
+           expect(this.bar.render).toBeDefined();
        });
 
        it('getCount should be defined',function () {
