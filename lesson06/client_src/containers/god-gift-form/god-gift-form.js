@@ -14,7 +14,7 @@ module.exports = function GodGiftForm(options) {
     var BASE_COPPER = options.resources[1].getCount();
     /* var userSomeResource = options.resources[2];*/
     var BASE_SOME = options.resources[2].getCount();
-
+    var res = options.resource;
     var hate = new Hate(BASE_HATE);
 
     /*
@@ -29,17 +29,32 @@ module.exports = function GodGiftForm(options) {
 
 
     Model.subscribeAll(resources, function () {
-        hate.setCount(BASE_HATE - resources[2].getCount() * 1 - resources[1].getCount() * 2 - resources[0].getCount() * 3);
-        resources[0].setCount(BASE_GOLD - resources[0].getCount());
-        resources[1].setCount(BASE_COPPER - resources[1].getCount());
-        resources[2].setCount(BASE_SOME - resources[2].getCount());
+        var godLoveCount = resources.reduce(function (acc, resources) {
+            var count = resources.getCount();
+            var name = resources.getName();
+
+            acc += count;
+            return acc;
+
+        }, 0);
+        hate.setCount(BASE_HATE - godLoveCount);
+        console.log(godLoveCount);
+        /*     hate.setCount(BASE_HATE - resources[2].getCount() * 1 - resources[1].getCount() * 2 - resources[0].getCount() * 3);
+         this.resources[0].setCount(BASE_GOLD - resources[0].getCount());
+         this.resources[1].setCount(BASE_COPPER - resources[1].getCount());
+         this.resources[2].setCount(BASE_SOME - resources[2].getCount());*/
     });
 
     var godHateIndicator = new GodHateIndicator({
         hate: hate
     });
 
-    var goldTunner = new GiftTunner({
+
+    var tunners = resources.map(function (tunnerModel) {
+        return new GiftTunner({resources : tunnerModel})
+    });
+
+/*    var goldTunner = new GiftTunner({
         resource: resources[0]
     });
 
@@ -49,7 +64,7 @@ module.exports = function GodGiftForm(options) {
 
     var someTunner = new GiftTunner({
         resource: resources[2]
-    });
+    });*/
 
 
     /*
@@ -80,10 +95,15 @@ module.exports = function GodGiftForm(options) {
 
     function render() {
         elem.html(App.templates['god-gift-form']({}));
-
+/*
         elem.find('.god-gift-form__gold-tunner').html(goldTunner.render().elem);
         elem.find('.god-gift-form__copper-tunner').html(copperTunner.render().elem);
-        elem.find('.god-gift-form__some-tunner').html(someTunner.render().elem);
+        elem.find('.god-gift-form__some-tunner').html(someTunner.render().elem);*/
+
+        elem.find('.god-gift-form__tunners').html(tunners.map(function(tunner) {
+            return tunner.render().elem;
+        }));
+
         elem.find('.god-gift-form__hate').html(godHateIndicator.render().elem);
 
         subscribeHandlers(elem);
