@@ -6,22 +6,22 @@ var Hate = require('models/hate.js');
 module.exports = function GodGiftForm(options) {
     var elem = $('<div></div>');
 
-
     var BASE_HATE = 30;
-    var BASE_GOLD = options.resources[0].getCount();
-    var BASE_COPPER = options.resources[1].getCount();
-    var BASE_SOME = options.resources[2].getCount();
-    var res = options.resources;
     var hate = new Hate(BASE_HATE);
 
     var resources = options.resources.map(function (res) {
-        return new Resource({name: res.getName()});
+        var resModel = new Resource({name: res.getName()});
+        var count = res.getCount();
+
+        resModel.subscribe(function() {
+            res.setCount(count - resModel.getCount());
+        });
+        return resModel;
     });
 
     Model.subscribeAll(resources, function () {
         var godCount = resources.reduce(function (acc, resources) {
             var count = resources.getCount();
-            var name = resources.getName();
 
             acc += count;
             return acc;
@@ -33,7 +33,6 @@ module.exports = function GodGiftForm(options) {
     var godHateIndicator = new GodHateIndicator({
         hate: hate
     });
-
 
     var tunners = resources.map(function (tunnerModel) {
         return new GiftTunner({resource: tunnerModel})
@@ -47,9 +46,7 @@ module.exports = function GodGiftForm(options) {
         }));
 
         elem.find('.god-gift-form__hate').html(godHateIndicator.render().elem);
-
         subscribeHandlers(elem);
-
         return this;
     }
 
