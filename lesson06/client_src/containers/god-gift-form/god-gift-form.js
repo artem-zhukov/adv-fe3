@@ -21,11 +21,7 @@ module.exports = function GodGiftForm(options) {
 
     Model.subscribeAll(resources, function () {
         var godCount = resources.reduce(function (acc, resources) {
-            var count = resources.getCount();
-
-            acc += count;
-            return acc;
-
+            return acc + resources.getCount()
         }, 0);
         hate.setCount(BASE_HATE - godCount);
     });
