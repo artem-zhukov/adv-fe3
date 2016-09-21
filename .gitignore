@@ -32,13 +32,10 @@ coverage
 build/Release
 
 # Dependency directories
-<<<<<<< HEAD
-node_modules/
-jspm_packages
-=======
+
 **/node_modules/
 **/jspm_packages/
->>>>>>> master
+
 
 # Optional npm cache directory
 .npm
@@ -53,10 +50,5 @@ bower_components/
 .bower-registry
 .bower-tmp
 
-<<<<<<< HEAD
-libs/
-client_build/
-=======
 **/libs
 **/client_build/
->>>>>>> master
