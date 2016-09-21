@@ -69,6 +69,7 @@ gulp.task('css', function () {
 
 gulp.task('js', function () {
     return gulp.src('js/*.js')
+        .pipe(gulpif(!argv.prod, sourcemaps.init()))
         .pipe(concat('main.js'))
         .pipe(uglify())
         .pipe(gulpif(!argv.prod, sourcemaps.write()))
